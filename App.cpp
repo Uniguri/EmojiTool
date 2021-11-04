@@ -102,10 +102,10 @@ public:
 			}
 			if (command == "help") {
 				std::cout << "Command list:" << std::endl;
-				std::cout << "    AddTag [Emoji path] Tag           Add tag to Emoji" << std::endl;
-				std::cout << "    RemoveTag [File path] Tag         Remove tag from File" << std::endl;
-				std::cout << "    GetEmojisByTag Tag                Get Emojis having that tag" << std::endl;
-				std::cout << "    Exit                              Exit" << std::endl;
+				std::cout << "    AddTag [Emoji path] [Tag]           Add tag to Emoji" << std::endl;
+				std::cout << "    RemoveTag [File path] [Tag]         Remove tag from File" << std::endl;
+				std::cout << "    GetEmojisByTag [Tag]                Get Emojis having that tag" << std::endl;
+				std::cout << "    Exit                                Exit" << std::endl;
 				continue;
 			}
 			if (command == "addtag") {
