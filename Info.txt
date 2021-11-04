@@ -1,0 +1,88 @@
+EmojiTool
+기능:
+	이모티콘에 태그 설정
+	이모티콘을 태그별로 보기
+	이모티콘 즐겨찾기 기능
+	이모티콘의 저장된 위치 이동, 삭제
+	GUI
+	
+구조:
+	Class EmojiTool: 
+		사용자가 이모티콘들을 컨트롤하는 클래스
+		private:
+			Directory mDir
+			EmojiContainer mFavoriteEmojis
+			Map<Tag, EmojiContainerByTag*> mTagedEmojiContainers
+			vector<Tag> mTagList
+		public:
+			EmojiTool(path _path)
+			
+			void RemoveDirectory(path _path)
+			void RemoveEmoji(path _path)
+			
+			void AddTagToEmoji(Emoji& _emoji, Tag tag)
+			
+			Directory& GetDirectory(path _path)
+			Emoji& GetEmoji(path _path)
+			vector<Emoji*> GetEmojisByTag(Tag _tag)
+		
+	Class Emoji: 
+		각각의 이모티콘을 나타내는 클래스
+		private:
+			string mFileName
+			string mEmojiName
+			Directory* mParentDir: delete 금지
+			vector<Tag> mtags
+		public:
+			Emoji(path _path)
+			
+			void AddTag(Tag _tag)
+			void RemoveTag(Tag _tag)
+			Directory& GetParentDirectory(void)
+			
+			void SetName(string _name)
+			
+			path GetPath(void)
+			vector<Tag> GetTags(void)
+			
+		
+	Class EmojiContainerByTag:
+		이모티콘들을 모아두는 컨테이너 클래스
+		private:
+			Tag mTag
+			vector<Emoji*> mEmojis: 컨테이너가 가지고 있는 Emoji들의 주소, Directory의 mEmojis속의 Emoji*와 같은 주소를 가짐, delete 금지
+		public:
+			EmojiContainerByTag(Tag _tag)
+			
+			Tag GetTag(void)
+			vector<Emoji*> GetEmojis(void)
+			
+		
+	Class Directory:
+		이모티콘들을 실제 위치대로 가지고 있는 컨테이너 클래스
+		실제 이모지 클래스들을 가지고 있음
+		이모티콘의 이동 및 삭제를 수행
+		private:
+			path mPath
+			vector<Directory> mDirectorys
+			vector<Emoji*> mEmojis : Emoji 클래스를 동적할당해서 주소 저장
+		public:
+			Directory(string _dir)
+			Directory(path _dir)
+			~Directory()
+			
+			void CreateDirectory(string _name)
+			void RenameEmoji(Emoji& _emoji)
+			void RenameDirectory(Directory& _dir)
+			void RemoveEmoji(Emoji& _emoji)
+			void RemoveDirectory(Directory& _dir)
+			void MoveDirectoryOfEmoji(Emoji& _emoji, Directory& _dest)
+			
+			Directory& GetDirectory(string _path)
+			Emoji& GetEmoji(string _path)
+			path GetPath(void)
+			
+	Type Tag:
+		
+		
+	
